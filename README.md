@@ -29,6 +29,24 @@ structurally hard, not policy-hard.
 8. **One file, one dependency.** The whole server is `server.py`; the only
    third-party dependency is the official `mcp` SDK. Audit it in one read.
 
+## How this differs from other SendGrid MCP servers
+
+Several SendGrid MCP servers exist. They solve different problems:
+
+- **Marketing servers** manage contacts, lists, templates, and campaigns.
+  Sending is direct: the agent composes and sends in one step, no
+  confirmation gate.
+- **Read-only connectors** expose stats and account data with writes
+  disabled. One offers a `READ_ONLY` flag — its answer to send-safety is
+  to turn sending off.
+- **This server** is for transactional sends you can safely leave enabled.
+  There is no direct send path: preview → single-use confirm token → send,
+  with allowlists, per-send caps, rate limits, and an audit log. BCC does
+  not exist.
+
+If you want campaign management, use a marketing server. If you want an
+agent that can send email without you holding your breath, that is this.
+
 ## Tools (11)
 
 | Tool | Class | Notes |

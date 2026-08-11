@@ -1,0 +1,36 @@
+# sendgrid-mcp-secure
+
+> Security-first MCP server for the SendGrid v3 API. Two-phase sends
+> (preview -> single-use confirm token -> send; no direct-send path),
+> dry-run mode by default, optional server-side recipient allowlist,
+> write rate limiting, append-only audit log, BCC disabled by design,
+> API key isolated to the environment. One Python file, one dependency
+> (the official `mcp` SDK) — auditable in a single read.
+
+Built as a structural answer to the 2025 postmark-mcp incident class
+(a malicious MCP package that silently BCC'd emails to an attacker).
+
+## Tools
+
+- preview_email: validate + render the exact payload, mint a 10-minute
+  single-use confirm token. Nothing is sent.
+- send_email: send ONLY a previously previewed payload, via its token.
+- add_suppression / remove_suppression: manage suppression lists
+  (removal requires confirm=true — it re-enables sending).
+- list_templates / get_template: transactional templates.
+- get_email_stats: delivery, opens, clicks, bounces.
+- list_suppressions / check_suppression: all five suppression lists.
+- get_domain_auth: domain authentication validity.
+- server_status: live security posture (mode, limits, audit path).
+
+## Docs
+
+- README.md: security model, install (uvx), configuration, honest limits.
+- test_server.py: 32 offline checks incl. adversarial fixtures (token
+  replay, forged tokens, allowlist bypass, rate-limit exhaustion).
+- server.py: the entire implementation.
+
+## Install
+
+uvx sendgrid-mcp-secure   (stdio transport; configure via env vars —
+SENDGRID_API_KEY, SENDGRID_MCP_MODE=dry-run|live, allowlist, caps)

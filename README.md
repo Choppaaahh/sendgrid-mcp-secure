@@ -127,3 +127,8 @@ Output contract: every tool returns a JSON object; failures return
 - SendGrid's API evolves; endpoints verified against the v3 docs at release.
 
 MIT license.
+
+## Contact
+
+Questions, bug reports, security issues: open a GitHub issue or email
+heychopp@proton.me. Security reports welcome by email first.

@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.Choppaaahh/sendgrid-mcp-secure",
   "title": "SendGrid Secure",
-  "description": "Security-first MCP server for the SendGrid v3 API: two-phase sends, dry-run by default, recipient allowlists, rate limits, audit log, no BCC.",
+  "description": "Security-first SendGrid MCP server: dry-run default, recipient allowlists, rate caps, audit log.",
   "repository": {
     "url": "https://github.com/Choppaaahh/sendgrid-mcp-secure",
     "source": "github"

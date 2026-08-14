@@ -1,5 +1,7 @@
 # sendgrid-mcp-secure
 
+<!-- mcp-name: io.github.Choppaaahh/sendgrid-mcp-secure -->
+
 A security-first MCP server for the SendGrid v3 API.
 
 Email is an irreversible, reputation-bearing action. In 2025 a malicious MCP

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Choppaaahh/sendgrid-mcp-secure",
+  "title": "SendGrid Secure",
+  "description": "Security-first MCP server for the SendGrid v3 API: two-phase sends, dry-run by default, recipient allowlists, rate limits, audit log, no BCC.",
+  "repository": {
+    "url": "https://github.com/Choppaaahh/sendgrid-mcp-secure",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "sendgrid-mcp-secure",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "SENDGRID_API_KEY",
+          "description": "SendGrid API key (use a restricted key with Mail Send scope only)",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "SENDGRID_MCP_MODE",
+          "description": "dry-run (default) or live",
+          "isRequired": false,
+          "format": "string"
+        },
+        {
+          "name": "SENDGRID_MCP_RECIPIENT_ALLOWLIST",
+          "description": "Comma-separated recipient addresses/domains allowed to receive mail",
+          "isRequired": false,
+          "format": "string"
+        },
+        {
+          "name": "SENDGRID_MCP_WRITES_PER_HOUR",
+          "description": "Hourly cap on write operations (sends)",
+          "isRequired": false,
+          "format": "number"
+        },
+        {
+          "name": "SENDGRID_MCP_MAX_RECIPIENTS",
+          "description": "Max recipients per send",
+          "isRequired": false,
+          "format": "number"
+        },
+        {
+          "name": "SENDGRID_MCP_AUDIT_LOG",
+          "description": "Path to the append-only audit log",
+          "isRequired": false,
+          "format": "string"
+        },
+        {
+          "name": "SENDGRID_MCP_ALLOW_BCC",
+          "description": "BCC stays disabled unless explicitly enabled",
+          "isRequired": false,
+          "format": "boolean"
+        }
+      ]
+    }
+  ]
+}

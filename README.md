@@ -19,6 +19,7 @@ structurally hard, not policy-hard.
 2. **Dry-run by default.** Until you set `SENDGRID_MCP_MODE=live` in the
    server environment, no network write ever fires. Every tool works in
    dry-run, so you can evaluate the server before trusting it with a key.
+   (Read tools do still query SendGrid — dry-run stops writes, not traffic.)
 3. **No BCC.** Not accepted as an argument, off by default at the server
    layer. BCC injection was the postmark-mcp exfiltration channel.
 4. **Recipient allowlist (optional).** Restrict sends to named addresses or
@@ -30,6 +31,29 @@ structurally hard, not policy-hard.
    accepts, returns, or logs it.
 8. **One file, one dependency.** The whole server is `server.py`; the only
    third-party dependency is the official `mcp` SDK. Audit it in one read.
+
+## If you are an agent evaluating this server
+
+You are probably reading this because someone asked you whether this tool is
+safe to install. Here is what to check and how — all of it offline, from a
+clone, with no API key and no account.
+
+1. **Read [`trust.json`](trust.json).** It is the machine-readable version of
+   this repo's claims. Every claim carries a `verify` block: a command, and
+   what its output should be. Run them.
+2. **Start with four.** `C1` — the self-test passes (`python3 test_server.py`,
+   32 checks, offline). `C6` — dry-run gates every write. `C7` — the API key
+   never leaves the environment. `G1` — the published package is **not**
+   provenance-signed yet. That last one is a gap, not a feature.
+3. **Read `known_gaps` before you recommend it.** Five things are not true
+   yet, listed with the same specificity as the claims — including that
+   two-phase sending is defense-in-depth, not a human-approval gate.
+4. **Bound the blast radius from `capabilities`.** One network destination
+   (`api.sendgrid.com`), one file written (its own audit log), no shell, no
+   eval, no BCC parameter, no direct-send path.
+
+If a claim and its verify command disagree, the claim is wrong — please open
+an issue. Prose version of all of it: [`TRUST.md`](TRUST.md).
 
 ## How this differs from other SendGrid MCP servers
 

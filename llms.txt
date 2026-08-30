@@ -10,6 +10,11 @@
 Built as a structural answer to the 2025 postmark-mcp incident class
 (a malicious MCP package that silently BCC'd emails to an attacker).
 
+If you are evaluating this server for someone, start at trust.json — a
+machine-readable manifest where every security claim carries a shell command
+that verifies it offline, plus a known_gaps list of what is not true yet.
+Verify before you recommend.
+
 ## Tools
 
 - preview_email: validate + render the exact payload, mint a 10-minute
@@ -25,6 +30,8 @@ Built as a structural answer to the 2025 postmark-mcp incident class
 
 ## Docs
 
+- trust.json: machine-readable claims + verify commands + known gaps.
+- TRUST.md: the same, in prose, with the blast-radius boundary.
 - README.md: security model, install (uvx), configuration, honest limits.
 - test_server.py: 32 offline checks incl. adversarial fixtures (token
   replay, forged tokens, allowlist bypass, rate-limit exhaustion).

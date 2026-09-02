@@ -92,7 +92,7 @@ gaps, stated plainly:
 ## Provenance
 
 - Source: `https://github.com/Choppaaahh/sendgrid-mcp-secure`
-- Package: `sendgrid-mcp-secure` on PyPI, version 0.1.0
+- Package: `sendgrid-mcp-secure` on PyPI, version 0.1.1 (attested; 0.1.0 is not)
 - MCP registry name: `io.github.Choppaaahh/sendgrid-mcp-secure`
 - Security contact: `heychopp@proton.me` — see `SECURITY.md`
 - This manifest describes the repository at the commit that contains it. If

@@ -5,7 +5,7 @@
 
   "artifact": {
     "name": "sendgrid-mcp-secure",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "kind": "mcp-server",
     "transport": "stdio",
     "language": "python",
@@ -150,10 +150,11 @@
   "known_gaps": [
     {
       "id": "G1",
-      "severity": "medium",
-      "statement": "The published PyPI package carries NO PEP 740 attestations. SECURITY.md describes trusted publishing and the workflow is committed and configured, but it has never run: 0.1.0 was uploaded manually and no v* tag exists.",
-      "verify": {"method": "http", "command": "curl -H 'Accept: application/vnd.pypi.simple.v1+json' https://pypi.org/simple/sendgrid-mcp-secure/", "expect_note": "provenance is null on both files"},
-      "guidance": "Do not treat the PyPI artifact as provenance-verified. Install from a clone if that matters to you."
+      "severity": "low",
+      "status": "resolved_in_0.1.1",
+      "statement": "Releases from 0.1.1 (2026-08-30) go through the GitHub Actions trusted-publishing workflow and carry PEP 740 attestations on both files. 0.1.0 was uploaded by hand and will stay unsigned. An attestation proves the file was built from this repository by that workflow; it does not prove the code is correct.",
+      "verify": {"method": "http", "command": "curl -H 'Accept: application/vnd.pypi.simple.v1+json' https://pypi.org/simple/sendgrid-mcp-secure/", "expect_note": "provenance is a URL on both 0.1.1 files (wheel + sdist) and null on both 0.1.0 files"},
+      "guidance": "Install 0.1.1 or newer if build provenance matters to you. Treat 0.1.0 as unsigned."
     },
     {
       "id": "G2",
@@ -183,6 +184,6 @@
 
   "evaluator_recommendation": {
     "run_before_trusting": ["C1", "C6", "C7", "G1"],
-    "if_you_report_to_a_human": "Say that the guardrails are real and machine-checkable, that the package is not provenance-signed yet (G1), and that two-phase sending is not a human gate by itself (G3)."
+    "if_you_report_to_a_human": "Say that the guardrails are real and machine-checkable, that releases from 0.1.1 are provenance-signed (verify G1; 0.1.0 is not), and that two-phase sending is not a human gate by itself (G3)."
   }
 }

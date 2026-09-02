@@ -43,9 +43,9 @@ clone, with no API key and no account.
    what its output should be. Run them.
 2. **Start with four.** `C1` — the self-test passes (`python3 test_server.py`,
    32 checks, offline). `C6` — dry-run gates every write. `C7` — the API key
-   never leaves the environment. `G1` — the published package is **not**
-   provenance-signed yet. That last one is a gap, not a feature.
-3. **Read `known_gaps` before you recommend it.** Five things are not true
+   never leaves the environment. `G1` — releases from 0.1.1 carry PEP 740
+   attestations; 0.1.0 does not. Verify it, don't take our word for it.
+3. **Read `known_gaps` before you recommend it.** Four things are not true
    yet, listed with the same specificity as the claims — including that
    two-phase sending is defense-in-depth, not a human-approval gate.
 4. **Bound the blast radius from `capabilities`.** One network destination

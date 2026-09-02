@@ -14,15 +14,15 @@ Only the latest release on PyPI is supported. There is no backporting.
 
 ## Release integrity
 
-- **0.1.0 is not provenance-signed. Read this before you rely on it.** A
-  GitHub Actions trusted-publishing workflow (OIDC, no long-lived tokens) is
-  committed at `.github/workflows/publish.yml` and fires on `v*` tags. It has
-  never run: 0.1.0 was uploaded by hand and no tag exists yet, so the package
-  on PyPI carries no PEP 740 attestations. Check for yourself —
+- **Releases from 0.1.1 are provenance-signed; 0.1.0 is not.** A GitHub
+  Actions trusted-publishing workflow (OIDC, no long-lived tokens) at
+  `.github/workflows/publish.yml` fires on `v*` tags. 0.1.1 (2026-08-30) was
+  the first release through it, and both of its files on PyPI carry PEP 740
+  attestations. Check for yourself —
   `curl -H 'Accept: application/vnd.pypi.simple.v1+json' https://pypi.org/simple/sendgrid-mcp-secure/`
-  returns `provenance: null` on both files. The first tagged release will go
-  out through the workflow and will carry attestations; until then, install
-  from a clone if build provenance matters to you. Tracked as G1 in
+  returns a `provenance` URL on the 0.1.1 wheel and sdist, and `provenance:
+  null` on the 0.1.0 files, which were uploaded by hand and will stay unsigned.
+  Install 0.1.1 or newer if build provenance matters to you. Tracked as G1 in
   `TRUST.md`.
 - The package has exactly one runtime dependency (`mcp>=1.2,<2`). To pin
   fully, install with hashes:

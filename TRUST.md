@@ -64,14 +64,14 @@ without confirmation) and assert that each one is refused.
 A trust manifest that lists only flattering facts is marketing. These are the
 gaps, stated plainly:
 
-- **G1 — the published package has no attestations.** `SECURITY.md` describes
-  trusted publishing with PEP 740 attestations, and the workflow for it is
-  committed and configured. It has never run: version 0.1.0 was uploaded by
-  hand, and no `v*` tag exists. Verify:
+- **G1 — resolved for 0.1.1; 0.1.0 stays unsigned.** Since 0.1.1 (2026-08-30)
+  releases go out through the trusted-publishing workflow and carry PEP 740
+  attestations. Verify:
   `curl -H 'Accept: application/vnd.pypi.simple.v1+json' https://pypi.org/simple/sendgrid-mcp-secure/`
-  → `provenance` is `null` on both files. Until a tagged release goes out
-  through the workflow, do not treat the PyPI artifact as provenance-verified.
-  Install from a clone if that matters to you.
+  → `provenance` is a URL on both 0.1.1 files and `null` on both 0.1.0 files.
+  0.1.0 was uploaded by hand and will never be signed; install 0.1.1 or newer.
+  What an attestation proves: the file was built from this repository by that
+  workflow. What it does not prove: that the code is correct. Run the claims.
 - **G2 — dry-run gates writes, not all network traffic.** The read tools
   (stats, templates, suppressions, domain auth) call SendGrid in dry-run mode
   too. Dry-run means nothing leaves that changes state; it does not mean the
